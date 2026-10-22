@@ -1,0 +1,264 @@
+:root {
+  --fondo: #14261d;
+  --pizarra: #1F3D2F;
+  --panel: #274935;
+  --borde: #3a5d47;
+  --tiza: #F2EFE6;
+  --tiza-tenue: #c8d3c9;
+  --oro: #E8C468;
+  --terracota: #C97064;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--fondo);
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(255,255,255,0.02) 0, transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(255,255,255,0.02) 0, transparent 40%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 16px;
+  font-family: 'Space Grotesk', sans-serif;
+  color: var(--tiza);
+}
+
+.pizarra {
+  background: var(--pizarra);
+  border: 10px solid #4a3323;
+  border-radius: 6px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5), inset 0 0 60px rgba(0,0,0,0.25);
+  padding: 40px 36px;
+  width: 100%;
+  max-width: 460px;
+}
+
+.titulo {
+  font-family: 'Kalam', cursive;
+  font-size: 2.4rem;
+  margin: 0 0 4px 0;
+  color: var(--tiza);
+  line-height: 1.1;
+}
+
+.subtitulo {
+  margin: 0 0 28px 0;
+  color: var(--tiza-tenue);
+  font-size: 0.95rem;
+}
+
+.libreta {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.fila {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border-bottom: 1px dashed var(--borde);
+  padding-bottom: 10px;
+}
+
+.fila label {
+  font-size: 0.92rem;
+  color: var(--tiza-tenue);
+}
+
+.fila input {
+  width: 70px;
+  padding: 8px 10px;
+  background: var(--panel);
+  border: 1px solid var(--borde);
+  border-radius: 4px;
+  color: var(--tiza);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+.fila input:focus {
+  outline: 2px solid var(--oro);
+  outline-offset: 1px;
+}
+
+.boton-calcular {
+  margin-top: 16px;
+  padding: 13px 20px;
+  background: var(--oro);
+  color: #2b2110;
+  border: none;
+  border-radius: 4px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.boton-calcular:hover {
+  background: #f0d488;
+  transform: translateY(-1px);
+}
+
+.boton-calcular:focus-visible {
+  outline: 2px solid var(--tiza);
+  outline-offset: 2px;
+}
+
+.error {
+  margin-top: 16px;
+  color: var(--terracota);
+  font-size: 0.9rem;
+}
+
+.oculto {
+  display: none !important;
+}
+
+.resultado {
+  margin-top: 26px;
+  border-top: 1px solid var(--borde);
+  padding-top: 20px;
+}
+
+.linea-resultado {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 0.85rem;
+  color: var(--tiza-tenue);
+  margin-bottom: 8px;
+}
+
+.linea-resultado strong {
+  color: var(--tiza);
+  font-size: 0.95rem;
+}
+
+.linea-resultado.total {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--borde);
+  font-size: 1rem;
+  color: var(--tiza);
+}
+
+.linea-resultado.total strong {
+  font-size: 1.4rem;
+  color: var(--oro);
+}
+
+.animacion {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 14px;
+}
+
+/* --- Animación de aprobado: check dibujado a mano --- */
+.svg-check {
+  width: 90px;
+  height: 90px;
+}
+
+.svg-check .circulo {
+  fill: none;
+  stroke: var(--oro);
+  stroke-width: 4;
+  stroke-dasharray: 300;
+  stroke-dashoffset: 300;
+  animation: dibujar-circulo 0.6s ease forwards;
+}
+
+.svg-check .check {
+  fill: none;
+  stroke: var(--oro);
+  stroke-width: 6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 60;
+  stroke-dashoffset: 60;
+  animation: dibujar-check 0.4s ease forwards 0.55s;
+}
+
+@keyframes dibujar-circulo {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes dibujar-check {
+  to { stroke-dashoffset: 0; }
+}
+
+/* --- Animación de ánimo: subrayado tipo lápiz --- */
+.lapiz-animo {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.linea-subrayado {
+  display: block;
+  width: 0;
+  height: 4px;
+  background: var(--terracota);
+  border-radius: 2px;
+  animation: trazar-linea 0.7s ease forwards;
+}
+
+@keyframes trazar-linea {
+  to { width: 140px; }
+}
+
+.mensaje-final {
+  font-family: 'Kalam', cursive;
+  font-size: 1.3rem;
+  margin: 0;
+}
+
+.mensaje-final.aprobado { color: var(--oro); }
+.mensaje-final.reprobado { color: var(--terracota); }
+
+/* --- Partículas doradas para aprobado --- */
+.particulas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.particula {
+  position: absolute;
+  top: -10px;
+  width: 8px;
+  height: 8px;
+  background: var(--oro);
+  border-radius: 50%;
+  opacity: 0.9;
+  animation: caer 2.4s linear forwards;
+}
+
+@keyframes caer {
+  to {
+    transform: translateY(105vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .svg-check .circulo,
+  .svg-check .check,
+  .linea-subrayado,
+  .particula {
+    animation: none !important;
+  }
+}

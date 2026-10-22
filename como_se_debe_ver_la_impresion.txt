@@ -1,0 +1,55 @@
+==========================================================
+              LIBRETA DE NOTAS - IMPRESION
+==========================================================
+
+                  LIBRETA DE NOTAS
+     Completa cada casilla para calcular tu promedio
+
+-----------------------------------------------------------
+ NOTA                          VALOR (0 - 100)
+-----------------------------------------------------------
+ Oral 1                              _____
+ Oral 2                              _____
+ Progress Booklet                    _____
+ Cambridge One                       _____
+ Speaking Task                       _____
+ Unit Test 3                         _____
+ Unit Test 4                         _____
+ Competency Test 1                   _____
+ Competency Test 2                   _____
+-----------------------------------------------------------
+
+                  [ Calcular promedio ]
+
+==========================================================
+                    RESULTADO
+==========================================================
+
+ Progress Booklet + Cambridge One
+ + Speaking Task  ................................  80.00
+
+ Unit Test 3 + Unit Test 4
+ + Competency Test 1 + 2  ........................  75.25
+
+ PROMEDIO TOTAL  .................................     78
+
+ -----------------------------------------------------
+ |   Estado:  APROBADO  (promedio >= 70)             |
+ -----------------------------------------------------
+
+==========================================================
+NOTAS SOBRE EL CALCULO:
+- Promo 1 = (PB + CBG + ST) / 3
+- Promo 2 = (UNT3 + UNT4 + CTEST1 + CTEST2) / 4
+- Promedio total = round((Promo1 + Promo2 + Oral1 + Oral2) / 4)
+- Aprobado si el promedio total es mayor o igual a 70.
+- Todas las notas son enteros entre 0 y 100.
+
+EJEMPLO RELLENADO:
+ Oral 1: 80 | Oral 2: 75 | PB: 85 | CBG: 90 | ST: 70
+ UNT3: 75 | UNT4: 80 | CTEST1: 70 | CTEST2: 78
+ Promo 1 = (85+90+70)/3  = 81.67
+ Promo 2 = (75+80+70+78)/4 = 75.75
+ Promedio total = round((81.67+75.75+80+75)/4) = 78
+ Estado: APROBADO
+==========================================================

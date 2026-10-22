@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Libreta de notas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="pizarra">
+  <h1 class="titulo">Libreta de notas</h1>
+  <p class="subtitulo">Completa cada casilla para calcular tu promedio</p>
+
+  <form id="form-notas" class="libreta">
+    {% for clave, etiqueta in campos %}
+    <div class="fila">
+      <label for="{{ clave }}">{{ etiqueta }}</label>
+      <input type="number" id="{{ clave }}" name="{{ clave }}" min="0" max="100" required>
+    </div>
+    {% endfor %}
+
+    <button type="submit" class="boton-calcular">Calcular promedio</button>
+  </form>
+
+  <p id="mensaje-error" class="error oculto"></p>
+
+  <div id="resultado" class="resultado oculto">
+    <div class="linea-resultado">
+      <span>Progress Booklet + Cambridge One + Speaking Task</span>
+      <strong id="promo1"></strong>
+    </div>
+    <div class="linea-resultado">
+      <span>Unit Test 3 + Unit Test 4 + Competency Test 1 + 2</span>
+      <strong id="promo2"></strong>
+    </div>
+    <div class="linea-resultado total">
+      <span>Promedio total</span>
+      <strong id="promtotal"></strong>
+    </div>
+
+    <div id="animacion" class="animacion oculto">
+      <svg id="svg-check" class="svg-check oculto" viewBox="0 0 100 100">
+        <circle class="circulo" cx="50" cy="50" r="45"/>
+        <path class="check" d="M27 52 L43 68 L75 32"/>
+      </svg>
+      <div id="lapiz-animo" class="lapiz-animo oculto">
+        <span class="linea-subrayado"></span>
+      </div>
+      <p id="mensaje-final" class="mensaje-final"></p>
+    </div>
+  </div>
+</div>
+
+<div id="particulas" class="particulas"></div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
