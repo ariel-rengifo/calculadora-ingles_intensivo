@@ -7,7 +7,19 @@ const lapizAnimo = document.getElementById("lapiz-animo");
 const mensajeFinal = document.getElementById("mensaje-final");
 const particulas = document.getElementById("particulas");
 
-form.addEventListener("submit", async (e) => {
+const CAMPOS = [
+  { clave: "oral1", label: "Oral 1" },
+  { clave: "oral2", label: "Oral 2" },
+  { clave: "pb", label: "Progress Booklet" },
+  { clave: "cbg", label: "Cambridge One" },
+  { clave: "st", label: "Speaking Task" },
+  { clave: "unt3", label: "Unit Test 3" },
+  { clave: "unt4", label: "Unit Test 4" },
+  { clave: "ctest1", label: "Competency Test 1" },
+  { clave: "ctest2", label: "Competency Test 2" },
+];
+
+form.addEventListener("submit", (e) => {
   e.preventDefault();
 
   mensajeError.classList.add("oculto");
@@ -19,24 +31,33 @@ form.addEventListener("submit", async (e) => {
 
   const datos = Object.fromEntries(new FormData(form).entries());
 
-  let respuesta;
-  try {
-    respuesta = await fetch("/calcular", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(datos),
-    });
-  } catch (err) {
-    mostrarError("No se pudo conectar con el servidor.");
-    return;
+  // Validar
+  const notas = {};
+  for (const { clave } of CAMPOS) {
+    const val = parseInt(datos[clave], 10);
+    if (isNaN(val)) {
+      mostrarError("Todas las notas deben ser números enteros.");
+      return;
+    }
+    if (val < 0 || val > 100) {
+      mostrarError("Las notas deben estar entre 0 y 100.");
+      return;
+    }
+    notas[clave] = val;
   }
 
-  const data = await respuesta.json();
+  // Cálculos (igual que en el backend)
+  const promo1 = (notas.pb + notas.cbg + notas.st) / 3;
+  const promo2 = (notas.unt3 + notas.unt4 + notas.ctest1 + notas.ctest2) / 4;
+  const promtotal = Math.round((promo1 + promo2 + notas.oral1 + notas.oral2) / 4);
+  const aprobado = promtotal >= 70;
 
-  if (!respuesta.ok) {
-    mostrarError(data.error || "Ocurrió un error inesperado.");
-    return;
-  }
+  const data = {
+    promo1: Math.round(promo1 * 100) / 100,
+    promo2: Math.round(promo2 * 100) / 100,
+    promtotal,
+    aprobado,
+  };
 
   mostrarResultado(data);
 });
